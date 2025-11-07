@@ -1,16 +1,94 @@
 <!DOCTYPE html>
-
-<html>
-
+<html lang="en">
 <head>
-	<link rel="stylesheet" href="styles.css">
-</head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animal Photo Gallery</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background-color: #383838;
+            font-family: 'Inter', sans-serif;
+        }
 
-<body>
-	<!-- the entire body must be written by student -->
-    <script type="text/javascript" src="./script.js">
-</script>
+        #animal-photos {
+            display: grid;
+            gap: 20px;
+            padding: 30px;
+            grid-template-columns: repeat(1, minmax(0, 1fr));
+        }
+
+        @media (min-width: 768px) {
+            #animal-photos {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+        }
+
+        .photo-card {
+            background-color: #555;
+            padding: 5px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+        
+        .photo-card:hover {
+            transform: scale(1.02);
+        }
+
+        .photo-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+
+    <div class="max-w-6xl mx-auto py-10">
+        <h1 id="photo-heading" class="text-4xl md:text-5xl font-extrabold text-white text-center tracking-wider uppercase mb-10">
+            Animal Photos
+        </h1>
+
+        <div id="animal-photos">
+            
+            <script>
+                const animals = [
+                    { name: 'camel', url: 'https://www2.d125.org/applied_arts/teched/courses/WEB/portfolios/2014_FallP8/Rami_Portfolio_Period8/unit4_css/project_1folder/cssProject1/camel.jpg' },
+                    { name: 'cheetah', url: 'https://www2.d125.org/applied_arts/teched/courses/WEB/portfolios/2014_FallP8/Rami_Portfolio_Period8/unit4_css/project_1folder/cssProject1/cheetah.jpg' },
+                    { name: 'elephant', url: 'https://www2.d125.org/applied_arts/teched/courses/WEB/portfolios/2014_FallP8/Rami_Portfolio_Period8/unit4_css/project_1folder/cssProject1/elephant.jpg' },
+                    { name: 'gorilla', url: 'https://www2.d125.org/applied_arts/teched/courses/WEB/portfolios/2014_FallP8/Rami_Portfolio_Period8/unit4_css/project_1folder/cssProject1/gorilla.jpg' },
+                    { name: 'koala', url: 'https://www2.d125.org/applied_arts/teched/courses/WEB/portfolios/2014_FallP8/Rami_Portfolio_Period8/unit4_css/project_1folder/cssProject1/koala.jpg' },
+                    { name: 'lion', url: 'https://www2.d125.org/applied_arts/teched/courses/WEB/portfolios/2014_FallP8/Rami_Portfolio_Period8/unit4_css/project_1folder/cssProject1/lion.jpg' },
+                    { name: 'polar bear', url: 'https://www2.d125.org/applied_arts/teched/courses/WEB/portfolios/2014_FallP8/Rami_Portfolio_Period8/unit4_css/project_1folder/cssProject1/polar_bear.jpg' },
+                    { name: 'tiger', url: 'https://www2.d125.org/applied_arts/teched/courses/WEB/portfolios/2014_FallP8/Rami_Portfolio_Period8/unit4_css/project_1folder/cssProject1/tiger.jpg' },
+                    { name: 'wolf', url: 'https://www2.d125.org/applied_arts/teched/courses/WEB/portfolios/2014_FallP8/Rami_Portfolio_Period8/unit4_css/project_1folder/cssProject1/wolf.jpg' }
+                ];
+
+                const gallery = document.getElementById('animal-photos');
+
+                animals.forEach(animal => {
+                    const card = document.createElement('div');
+                    card.className = 'photo-card';
+                    
+                    const img = document.createElement('img');
+                    img.src = animal.url;
+                    img.alt = `Photo of a ${animal.name}`;
+                    
+                    img.onerror = function() {
+                        this.onerror=null; 
+                        this.src='https://placehold.co/400x250/383838/ffffff?text=Image+Unavailable';
+                    }
+
+                    card.appendChild(img);
+                    gallery.appendChild(card);
+                });
+            </script>
+
+        </div>
+    </div>
 
 </body>
-
 </html>
